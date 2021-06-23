@@ -1,0 +1,39 @@
+---
+name: urbackup-server
+releases:
+- name: urbackup-server
+  version: latest
+
+stemcells:
+- alias: default
+  os : ubuntu-xenial
+  version: 621.94
+
+instance_groups:
+- name: urbackup
+  azs: [z1]
+  instances: 1
+  vm_type: urbackup
+  stemcell: default
+  networks:
+  - name: public
+    default: [dns, gateway]
+    static_ips:
+    - 172.30.111.200
+  - name: default
+  jobs:
+  - name: urbackup
+    release: urbackup-server 
+    properties:
+       port:
+       - 55414
+       - 55413
+       - 55415
+       - 35623
+
+update:
+  canaries: 1
+  canary_watch_time: 30000 - 60000
+  max_in_flight: 8
+  serial: false
+  update_watch_time: 30000 - 60000

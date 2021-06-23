@@ -1,0 +1,28 @@
+#!/bin/bash -e
+
+set -e -x
+
+export JOB_NAME=urbackup
+export RUN_DIR=/var/vcap/sys/run/$JOB_NAME
+export LOG_DIR=/var/vcap/sys/log/$JOB_NAME
+export PKG_DIR=/var/vcap/packages/$JOB_NAME/dpkg-dev
+export PID_FILE=/var/run/urbackupsrv.pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+    serivce urbackupsvr enable
+
+    ;;
+
+  stop)
+    service urbackupsvr stop
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+
+esac
+exit 0

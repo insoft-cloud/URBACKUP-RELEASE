@@ -1,0 +1,3 @@
+set -e -x
+
+cp -a urbackup/dpkg-dev/*.deb ${BOSH_INSTALL_TARGET}

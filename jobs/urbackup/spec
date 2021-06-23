@@ -1,0 +1,26 @@
+---
+name: urbackup
+
+dependencies: []
+
+packages: 
+- urbackup
+
+templates:
+  bin/urbackup_ctl.erb: bin/urbackup_ctl
+  pre-start: bin/pre-start
+  post-start: bin/post-start
+provides:
+- name: urbackup
+  type: urbackup
+
+properties:
+  port:
+    description: urbackup server port
+    default:
+    - 55413 # web interface FastCGi
+    - 55414 # HTTP web interface
+    - 55415 # external client connect
+    - 35623 # auto connect internal client
+  database:
+    default: egovp-platform

@@ -1,0 +1,4 @@
+check process urbackup with pidfile /var/run/urbackupsrv.pid
+  start program "/var/vcap/jobs/urbackup/bin/urbackup_ctl start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/urbackup/bin/urbackup_ctl stop"
+  group vcap
